@@ -20,12 +20,12 @@ namespace DataAccess.Concrete.EntityFremavork
                     );
             }
         //Entities in the database are mapped to Entities in the entity class
-        public DbSet<Cars> Cars { get; set; }
-        public DbSet<Communications> Communications { get; set; }
-        public DbSet<Customers> Customers { get; set; }
-        public DbSet<Purchases> Purchases { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Communication> Communications { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Rent> Rent { get; set; }
-        public DbSet<Sales> Sales { get; set; }
+        public DbSet<Sale> Sales { get; set; }
 
 
     }

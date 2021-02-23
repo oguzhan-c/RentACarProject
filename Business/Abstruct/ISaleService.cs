@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Business.Abstruct
 {
-    public interface ICarService
+    public interface ISaleService
     {
-        List<Car> GetAll();
+        List<Sale> GetAll();
     }
 }

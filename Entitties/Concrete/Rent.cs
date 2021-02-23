@@ -1,4 +1,4 @@
-﻿using Entities.Abstruct;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +13,7 @@ namespace Entities.Concrute
         public int CustomerId { get; set; }
         public int CarId { get; set; }
         public DateTime RentDate { get; set; }
-        public double DailyPrice { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public decimal DailyPrice { get; set; }
     }
 }

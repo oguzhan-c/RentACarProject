@@ -7,18 +7,18 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarManager : ICarService
+    public class SaleManager : ISaleService
     {
-        ICarDal _carDal;
+        ISaleDal saleDal;
 
-        public CarManager(ICarDal carDal)
+        public SaleManager(ISaleDal saleDal)
         {
-            _carDal = carDal;
+            this.saleDal = saleDal;
         }
 
-        public List<Car> GetAll()
+        public List<Sale> GetAll()
         {
-            return _carDal.GetAll();
+            return saleDal.GetAll();
         }
     }
 }

@@ -10,13 +10,13 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryProductDal : ICarDal
     {
-        List<Cars> cars;
+        List<Car> cars;
 
         public InMemoryProductDal()
         {
-            this.cars = new List<Cars>
+            this.cars = new List<Car>
             {
-                new Cars
+                new Car
                 {
                     CarId=1,
                     Marque="Ford",
@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.InMemory
                     Plaque="07FF546",
                     Price=3791
                 },
-                new Cars
+                new Car
                 {
                     CarId=2,
                     Marque="Ford",
@@ -41,33 +41,33 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public void Add(Cars car)
+        public void Add(Car car)
         {
             cars.Add(car);
         }
 
-        public void Delete(Cars car)
+        public void Delete(Car car)
         {
-            Cars carToDelete = cars.SingleOrDefault
+            Car carToDelete = cars.SingleOrDefault
                 (
                     c => c.CarId == car.CarId
                 );
             cars.Remove(carToDelete);
         }
 
-        public Cars Get(Expression<Func<Cars, bool>> filter)
+        public Car Get(Expression<Func<Car, bool>> filter)
         {
             return null;
         }
 
-        public List<Cars> GetAll(Expression<Func<Cars, bool>> filter = null)
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             return cars;
         }
 
-        public void Update(Cars car)
+        public void Update(Car car)
         {
-            Cars carToUpdate = cars.SingleOrDefault
+            Car carToUpdate = cars.SingleOrDefault
                 (
                     c => c.CarId == car.CarId
                 );

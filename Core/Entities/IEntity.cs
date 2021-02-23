@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Abstruct
+namespace Core.Entities
 {   
     //IEntity yi implemente eden class bir veritabanı Tablosudur
     public interface IEntity

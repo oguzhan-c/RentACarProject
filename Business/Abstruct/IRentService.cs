@@ -1,12 +1,14 @@
 ﻿using Entities.Concrute;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Abstruct
 {
-    public interface ICarService
+    public interface IRentService
     {
-        List<Car> GetAll();
+        List<Rent> GetAll();
+        List<RentDetailDto> GetRentDetails();
     }
 }

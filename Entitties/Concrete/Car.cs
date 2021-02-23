@@ -1,4 +1,4 @@
-﻿using Entities.Abstruct;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Entities.Concrute
 {
-         public class Cars: IEntity
+         public class Car: IEntity
         {
             [Key]
             public int CarId { get; set; }

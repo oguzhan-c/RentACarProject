@@ -1,4 +1,4 @@
-﻿using Entities.Abstruct;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Entities.Concrute
 {
-    public class Purchases : IEntity
+    public class Purchase : IEntity
     {
         [Key]
         public int PurchaseId { get; set; }
         public int CustomerId { get; set; }
         public int CarId { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public double PurchasePrice { get; set; }
+        public decimal PurchasePrice { get; set; }
     }
 }

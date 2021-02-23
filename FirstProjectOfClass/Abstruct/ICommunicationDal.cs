@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstruct
 {
-    public interface ICarDal : IEntityRepository<Car>
+    public interface ICommunicationDal: IEntityRepository<Communication>
     {
     }
 }
