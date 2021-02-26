@@ -1,4 +1,7 @@
 ﻿using Business.Abstruct;
+using Business.Constat;
+using Core.Utilities.Results.Abstruct;
+using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct;
 using Entities.Concrete;
 using Entities.Dtos;
@@ -17,14 +20,39 @@ namespace Business.Concrete
             this.customerDal = customerDal;
         }
 
-        public List<Customer> GetAll()
+        public IResult Add(Customer customer)
         {
-            return customerDal.GetAll();
+            customerDal.Add(customer);
+            return new SuccessResult(Messages.Added);
         }
 
-        public List<CustomerDetailDto> GetCustomerDetails()
+        public IResult Delete(Customer customer)
         {
-            return customerDal.GetCustomerDetails();
+            customerDal.Delete(customer);
+
+            return new SuccessResult(Messages.Deleted);
+        }
+
+        public IDataResult<List<Customer>> GetAll()
+        {
+            return new SuccessDataResult<List<Customer>>(customerDal.GetAll(),Messages.Listed);
+        }
+
+        public IDataResult<Customer> GetById(int id)
+        {
+            customerDal.GetAll(c => c.CustomerId == id);
+            return new SuccessDataResult<Customer>(Messages.ListedById);
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(customerDal.GetCustomerDetails(),Messages.CustomerDetailsListed);
+        }
+
+        public IResult Update(Customer customer)
+        {
+            customerDal.Update(customer);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

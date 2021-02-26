@@ -1,4 +1,7 @@
 ﻿using Business.Abstruct;
+using Business.Constat;
+using Core.Utilities.Results.Abstruct;
+using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct;
 using Entities.Concrute;
 using Entities.Dtos;
@@ -17,14 +20,38 @@ namespace Business.Concrete
             this.rentDal = rentDal;
         }
 
-        public List<Rent> GetAll()
+        public IResult Add(Rent rent)
         {
-            return rentDal.GetAll();
+            rentDal.Add(rent);
+            return new SuccessResult(Messages.Added);
         }
 
-        public List<RentDetailDto> GetRentDetails()
+        public IResult Delete(Rent rent)
         {
-            return rentDal.GetRentDetails();
+            rentDal.Delete(rent);
+            return new SuccessResult(Messages.Deleted);
+
+        }
+
+        public IDataResult<List<Rent>> GetAll()
+        {
+            return new SuccessDataResult<List<Rent>>(rentDal.GetAll(),Messages.Listed);
+        }
+
+        public IDataResult<Rent> GetById(int id)
+        {
+            return new SuccessDataResult<Rent>(rentDal.Get(r=>r.RentId == id),Messages.ListedById);
+        }
+
+        public IDataResult<List<RentDetailDto>> GetRentDetails()
+        {
+            return new SuccessDataResult<List<RentDetailDto>>(rentDal.GetRentDetails(), Messages.RentDetailsListed);
+        }
+
+        public IResult Update(Rent rent)
+        {
+            rentDal.Update(rent);
+            return new SuccessResult(Messages.Updated); 
         }
     }
 }

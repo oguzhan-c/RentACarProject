@@ -1,4 +1,7 @@
 ﻿using Business.Abstruct;
+using Business.Constat;
+using Core.Utilities.Results.Abstruct;
+using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct;
 using Entities.Concrute;
 using System;
@@ -16,9 +19,31 @@ namespace Business.Concrete
             this.communicationDal = communicationDal;
         }
 
-        public List<Communication> GetAll()
+        public IResult Add(Communication communication)
         {
-            return communicationDal.GetAll();
+            communicationDal.Add(communication);
+            return new SuccessResult(Messages.Added);
+        }
+
+        public IResult Delete(Communication communication)
+        {
+            communicationDal.Delete(communication);
+            return new SuccessResult(Messages.Deleted);
+        }
+
+        public IDataResult<List<Communication>> GetAll()
+        {
+           
+            return new SuccessDataResult<List<Communication>>(communicationDal.GetAll(),Messages.Listed);
+        }
+        public IDataResult<List<Communication>> GetByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<List<Communication>>(communicationDal.GetAll(c=>c.CustomerId == customerId));
+        }
+
+        public IResult Update(Communication communication)
+        {
+            throw new NotImplementedException();
         }
     }
 
