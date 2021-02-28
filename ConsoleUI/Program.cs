@@ -11,7 +11,18 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            RentManagerTest();
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            var result = userManager.GetAll();
+
+            foreach (var user in result.Data)
+            {
+                if (result.Succcess)
+                {
+                    Console.WriteLine(user.UserEmail);
+                }
+            }
+
         }
 
         private static void RentManagerTest()
@@ -168,7 +179,7 @@ namespace ConsoleUI
                             "Customer Country :\t" + customer.Country + "\n" +
                             "Customer Address :\t" + customer.Address + "\n" +
                             "Customer Phone Number :\t" + customer.PhoneNumber + "\n" +
-                            "Customer E-Mail Address :\t" + customer.EmailAddress + "\n" +
+                            "Customer E-Mail Address :\t" + customer.SaveEmail + "\n" +
                             "Customer Zip Code :\t" + customer.ZipCode + "\n" +
                             "---------------------------------------------------"
                         );

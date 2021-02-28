@@ -10,6 +10,7 @@ namespace Entities.Concrete
     {
         [Key]
         public int CustomerId { get; set; }
+        public int UserId { get; set; }
         public String CustomerName { get; set; }
         public String CustomerLastname { get; set; }
         public String Gender { get; set; }

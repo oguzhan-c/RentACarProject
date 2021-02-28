@@ -26,6 +26,7 @@ namespace DataAccess.Concrete.EntityFremavork
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Rent> Rent { get; set; }
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
     }

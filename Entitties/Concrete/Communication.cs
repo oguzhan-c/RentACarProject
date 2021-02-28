@@ -17,7 +17,7 @@ namespace Entities.Concrute
         public String Country { get; set; }
         public String Address { get; set; }
         public String PhoneNumber { get; set; }
-        public String EmailAddress { get; set; }
+        public String SaveEmail { get; set; }
         public String ZipCode { get; set; }
     }
 }

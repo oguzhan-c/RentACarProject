@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.EntityFremavork
                                  Country = co.Country,
                                  Address = co.Address,
                                  PhoneNumber = co.PhoneNumber,
-                                 EmailAddress = co.EmailAddress,
+                                 SaveEmail = co.SaveEmail,
                                  ZipCode = co.ZipCode
                              };
 

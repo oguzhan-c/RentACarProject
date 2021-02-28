@@ -19,7 +19,7 @@ namespace Entities.Dtos
         public String Country { get; set; }
         public String Address { get; set; }
         public String PhoneNumber { get; set; }
-        public String EmailAddress { get; set; }
         public String ZipCode { get; set; }
+        public string SaveEmail { get; set; }
     }
 }

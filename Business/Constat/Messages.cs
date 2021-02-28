@@ -16,5 +16,6 @@ namespace Business.Constat
         public static String ListedById = "Listed By Id";
         public static string CustomerDetailsListed = "Customer Details Listed";
         public static string RentDetailsListed = "Rent Details Listed";
+        internal static string UserDetaislListed ="User Details Listed";
     }
 } 
