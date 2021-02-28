@@ -36,7 +36,7 @@ namespace Core.DataAcces.EntitiyFramework
         {
             using (ContextTip context = new ContextTip())
             {
-                return context.Set<EntityTip>().SingleOrDefault();
+                return context.Set<EntityTip>().SingleOrDefault(filter);
             }
         }
 
