@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Abstruct
+namespace DataAccess.Abstruct.DataAcessLayers
 {
-    public interface ICommunicationDal: IEntityRepository<Communication>
+    public interface ICarDal : IEntityRepository<Car>
     {
     }
 }

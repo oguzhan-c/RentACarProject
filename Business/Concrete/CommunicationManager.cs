@@ -2,7 +2,7 @@
 using Business.Constat;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
-using DataAccess.Abstruct;
+using DataAccess.Abstruct.DataAcessLayers;
 using Entities.Concrute;
 using System;
 using System.Collections.Generic;
@@ -22,19 +22,19 @@ namespace Business.Concrete
         public IResult Add(Communication communication)
         {
             communicationDal.Add(communication);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult(CommunicationMessages.Added);
         }
 
         public IResult Delete(Communication communication)
         {
             communicationDal.Delete(communication);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(CommunicationMessages.Deleted);
         }
 
         public IDataResult<List<Communication>> GetAll()
         {
            
-            return new SuccessDataResult<List<Communication>>(communicationDal.GetAll(),Messages.Listed);
+            return new SuccessDataResult<List<Communication>>(communicationDal.GetAll(), CommunicationMessages.Listed);
         }
         public IDataResult<List<Communication>> GetByCustomerId(int customerId)
         {
@@ -43,7 +43,8 @@ namespace Business.Concrete
 
         public IResult Update(Communication communication)
         {
-            throw new NotImplementedException();
+            communicationDal.Update(communication);
+            return new SuccessResult(CommunicationMessages.Updated);
         }
     }
 

@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Abstruct
+namespace DataAccess.Abstruct.DataAcessLayers
 {
     public interface IUserDal : IEntityRepository<User>
     {
-        List<UserDetailsDto> GetUserDetails(); 
+        List<UserDetailsDto> GetUserDetails();
     }
 }

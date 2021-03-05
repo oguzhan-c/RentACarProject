@@ -1,8 +1,8 @@
 
 using Business.Abstruct;
 using Business.Concrete;
-using DataAccess.Abstruct;
-using DataAccess.Concrete.EntityFremavork;
+using DataAccess.Abstruct.DataAcessLayers;
+using DataAccess.Concrete.EntityFremavork.DataAcessLayers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,20 +34,21 @@ namespace WebAPI
             //IoC Container eðer baðýmlýlýk "Dependency" görürsen virgülden sonra gelen yeri arka planda newler
             //Singleton data kullanýlanlarda kullanýlmaz  iyi performans verir
             //Singelton kullanýlarak IoC Containerler eklendi ve bu Containerler Tüm Cleintler için kullanýlabilir
-            services.AddSingleton</*Dependency*/ICarService,CarManager>();
-            services.AddSingleton<ICarDal, EfCarDal>();
-            services.AddSingleton<ICommunicationService, CommunicationManager>();
-            services.AddSingleton<ICommunicationDal,EfCommunicationDal>();
-            services.AddSingleton<ICustomerService,CustomerManager>();
-            services.AddSingleton<ICustomerDal,EfCustomerDal>();
-            services.AddSingleton<IPurchaseService,PurchaseManager>();
-            services.AddSingleton<IPurchaseDal,EfPurchaseDal>();
-            services.AddSingleton<IRentService,RentManager>();
-            services.AddSingleton<IRentDal, EfRentDal>();
-            services.AddSingleton<ISaleService,SaleManager>();
-            services.AddSingleton<ISaleDal,EfSaleDal>();
-            services.AddSingleton<IUserService, UserManager>();
-            services.AddSingleton<IUserDal, EfUserDal>();
+            //Autofac kullanýlarak yapýldý
+            //services.AddSingleton</*Dependency*/ICarService,CarManager>();
+            //services.AddSingleton<ICarDal, EfCarDal>();
+            //services.AddSingleton<ICommunicationService, CommunicationManager>();
+            //services.AddSingleton<ICommunicationDal,EfCommunicationDal>();
+            //services.AddSingleton<ICustomerService,CustomerManager>();
+            //services.AddSingleton<ICustomerDal,EfCustomerDal>();
+            //services.AddSingleton<IPurchaseService,PurchaseManager>();
+            //services.AddSingleton<IPurchaseDal,EfPurchaseDal>();
+            //services.AddSingleton<IRentService,RentManager>();
+            //services.AddSingleton<IRentDal, EfRentDal>();
+            //services.AddSingleton<ISaleService,SaleManager>();
+            //services.AddSingleton<ISaleDal,EfSaleDal>();
+            //services.AddSingleton<IUserService, UserManager>();
+            //services.AddSingleton<IUserDal, EfUserDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

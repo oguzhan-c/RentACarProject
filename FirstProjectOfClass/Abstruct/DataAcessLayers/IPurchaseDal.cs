@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Abstruct
+namespace DataAccess.Abstruct.DataAcessLayers
 {
-    public interface ISaleDal : IEntityRepository<Sale>
+    public interface IPurchaseDal : IEntityRepository<Purchase>
     {
     }
 }

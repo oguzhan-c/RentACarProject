@@ -2,7 +2,7 @@
 using Business.Constat;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
-using DataAccess.Abstruct;
+using DataAccess.Abstruct.DataAcessLayers;
 using Entities.Concrete;
 using Entities.Dtos;
 using System;
@@ -22,34 +22,34 @@ namespace Business.Concrete
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult(UserMessages.Added);
         }
 
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(UserMessages.Deleted);
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.Listed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(),UserMessages.Listed);
         }
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=>u.UserId == id),Messages.ListedById);
+            return new SuccessDataResult<User>(_userDal.Get(u=>u.UserId == id),UserMessages.ListedById);
         }
 
         public IDataResult<List<UserDetailsDto>> GetUsersDetails()
         {
-            return new SuccessDataResult<List<UserDetailsDto>>(_userDal.GetUserDetails(),Messages.UserDetaislListed);
+            return new SuccessDataResult<List<UserDetailsDto>>(_userDal.GetUserDetails(),UserMessages.UserDetaislListed);
         }
 
         public IResult Update(User user)
         {
             _userDal.Update(user);
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult(UserMessages.Updated);
         }
     }
 }

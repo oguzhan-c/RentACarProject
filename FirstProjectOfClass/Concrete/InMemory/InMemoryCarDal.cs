@@ -1,4 +1,4 @@
-﻿using DataAccess.Abstruct;
+﻿using DataAccess.Abstruct.DataAcessLayers;
 using Entities.Concrute;
 using System;
 using System.Collections.Generic;

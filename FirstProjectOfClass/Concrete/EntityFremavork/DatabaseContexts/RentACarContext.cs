@@ -5,20 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Concrete.EntityFremavork
+namespace DataAccess.Concrete.EntityFremavork.DatabaseContexts
 {
     //Context : Db deki Tablolar İle Class ları Birbirine Bağlamak 
     public class RentACarContext : DbContext
     {
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlServer
-                    (
-                        @"Server= (localdb)\MSSQLLocalDB;
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer
+                (
+                    @"Server= (localdb)\MSSQLLocalDB;
                         Database=RentACar;
                         Trusted_Connection=true"
-                    );
-            }
+                );
+        }
         //Entities in the database are mapped to Entities in the entity class
         public DbSet<Car> Cars { get; set; }
         public DbSet<Communication> Communications { get; set; }

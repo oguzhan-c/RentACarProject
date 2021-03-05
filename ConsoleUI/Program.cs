@@ -1,5 +1,5 @@
 ﻿using Business.Concrete;
-using DataAccess.Concrete.EntityFremavork;
+using DataAccess.Concrete.EntityFremavork.DataAcessLayers;
 using Entities.Concrete;
 using System;
 
@@ -10,7 +10,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+           
+        }
 
+        private static void UserTest()
+        {
             UserManager userManager = new UserManager(new EfUserDal());
 
             var result = userManager.GetAll();
@@ -19,10 +23,15 @@ namespace ConsoleUI
             {
                 if (result.Succcess)
                 {
-                    Console.WriteLine(user.UserEmail);
+                    Console.WriteLine
+                        (
+                            "User Id :\t" + user.UserId + "\n" +
+                            "User E-Mail :\t" + user.UserEmail + "\n" +
+                            "User Password :\t" + user.UserPassword + "\n"
+
+                        );
                 }
             }
-
         }
 
         private static void RentManagerTest()
@@ -66,7 +75,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Error Message :\t" + result.Message);
             }
-           
+
         }
 
         private static void RentDailyPriceTest(RentManager rentManager)
@@ -83,7 +92,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Error Message :\t" + result.Message);
             }
-           
+
         }
 
         private static void SaleManagerTest()
@@ -153,7 +162,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Error Message :\t" + result.Message);
             }
-            
+
         }
 
         private static void CustomerDetailsTest(CustomerManager customerManager)
@@ -189,7 +198,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Error Message :\t" + result.Message);
             }
-            
+
         }
 
         private static void CommunicationManagerTest()

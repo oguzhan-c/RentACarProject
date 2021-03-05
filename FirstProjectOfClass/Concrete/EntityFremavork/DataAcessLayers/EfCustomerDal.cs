@@ -1,13 +1,14 @@
 ﻿using Core.DataAcces.EntitiyFramework;
-using DataAccess.Abstruct;
 using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using DataAccess.Concrete.EntityFremavork.DatabaseContexts;
+using DataAccess.Abstruct.DataAcessLayers;
 
-namespace DataAccess.Concrete.EntityFremavork
+namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
 {
     public class EfCustomerDal : EfEntitiyRepositoryBase<Customer, RentACarContext>, ICustomerDal
     {

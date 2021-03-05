@@ -2,7 +2,7 @@
 using Business.Constat;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
-using DataAccess.Abstruct;
+using DataAccess.Abstruct.DataAcessLayers;
 using Entities.Concrute;
 using Entities.Dtos;
 using System;
@@ -23,35 +23,35 @@ namespace Business.Concrete
         public IResult Add(Rent rent)
         {
             rentDal.Add(rent);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult(RentMessages.Added);
         }
 
         public IResult Delete(Rent rent)
         {
             rentDal.Delete(rent);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult(RentMessages.Deleted);
 
         }
 
         public IDataResult<List<Rent>> GetAll()
         {
-            return new SuccessDataResult<List<Rent>>(rentDal.GetAll(),Messages.Listed);
+            return new SuccessDataResult<List<Rent>>(rentDal.GetAll(), RentMessages.Listed);
         }
 
         public IDataResult<Rent> GetById(int id)
         {
-            return new SuccessDataResult<Rent>(rentDal.Get(r=>r.RentId == id),Messages.ListedById);
+            return new SuccessDataResult<Rent>(rentDal.Get(r=>r.RentId == id), RentMessages.ListedById);
         }
 
         public IDataResult<List<RentDetailDto>> GetRentDetails()
         {
-            return new SuccessDataResult<List<RentDetailDto>>(rentDal.GetRentDetails(), Messages.RentDetailsListed);
+            return new SuccessDataResult<List<RentDetailDto>>(rentDal.GetRentDetails(), RentMessages.RentDetailsListed);
         }
 
         public IResult Update(Rent rent)
         {
             rentDal.Update(rent);
-            return new SuccessResult(Messages.Updated); 
+            return new SuccessResult(RentMessages.Updated); 
         }
     }
 }
