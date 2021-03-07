@@ -13,5 +13,6 @@ namespace Business.Constat
         public static string Updated = "Communication Info Updated";
         public static string Deleted = "Communication Info Deleted";
         public static string ListedById = "Communications Listed By Id";
+        internal static string ComminucationAlreadyExist;
     }
 }

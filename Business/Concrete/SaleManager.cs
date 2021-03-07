@@ -1,5 +1,6 @@
 ﻿using Business.Abstruct;
 using Business.Constat;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct.DataAcessLayers;
@@ -13,14 +14,24 @@ namespace Business.Concrete
     public class SaleManager : ISaleService
     {
         ISaleDal saleDal;
+        ICarService _carService;
 
-        public SaleManager(ISaleDal saleDal)
+        public SaleManager(ISaleDal saleDal , ICarService carService)
         {
             this.saleDal = saleDal;
+            _carService = carService;
         }
 
         public IResult Add(Sale sale)
         {
+            var result = BusinessRule.Run
+                (
+                    CheckIfCarCanNotSale(sale.CarId)
+                );
+            if (result != null)
+            {
+                return result;
+            }
             saleDal.Add(sale);
             return new SuccessResult(SaleMessages.Added);
         }
@@ -46,6 +57,15 @@ namespace Business.Concrete
             saleDal.Update(sale);
             return new SuccessResult(SaleMessages.Updated);
 
+        }
+
+        private IResult CheckIfCarCanNotSale(int carId)
+        {
+            if (_carService.CheckIfCarAlreadyExist(carId).Succcess)
+            {
+                return new ErrorResult(SaleMessages.YouCanNotSaleThisCar);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -14,5 +14,7 @@ namespace Business.Constat
         public static string Deleted = "User Info Deleted";
         public static string ListedById = "Users Listed By Id";
         internal static string UserDetaislListed = "User Details Listed";
+        internal static string UserAlreadyExist;
+        internal static string UserAlreadyDeleted;
     }
 }

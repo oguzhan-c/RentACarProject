@@ -12,5 +12,7 @@ namespace Business.Constat
         public static String Updated = "Car Info Updated";
         public static String Deleted = "Car Info Deleted";
         public static String ListedById = "Cars Listed By Id";
+        internal static string CarAlreadyExist;
+        internal static string ThisCarIsNotExist;
     }
 }

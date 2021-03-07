@@ -1,5 +1,6 @@
 ﻿using Business.Abstruct;
 using Business.Constat;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct.DataAcessLayers;
@@ -7,6 +8,7 @@ using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -22,8 +24,29 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
+            var result = BusinessRule.Run
+                (
+                    CheckIfCustomerAlreadyExist(customer.CustomerId)
+                );
+            if (result != null)
+            {
+                return result;
+            }
             customerDal.Add(customer);
             return new SuccessResult(CustomerMessages.Added);
+        }
+
+        public IResult CheckIfCustomerAlreadyExist(int customerId)
+        {
+            {
+                var result = customerDal.GetAll(c => c.CustomerId == customerId).Any();
+
+                if (result)
+                {
+                    return new ErrorResult(CustomerMessages.CustomerAlreadyExist);
+                }
+                return new SuccessResult();
+            }
         }
 
         public IResult Delete(Customer customer)
@@ -53,6 +76,6 @@ namespace Business.Concrete
         {
             customerDal.Update(customer);
             return new SuccessResult(CustomerMessages.Updated);
-        }
+        }      
     }
 }

@@ -14,5 +14,7 @@ namespace Business.Constat
         public static string Deleted = "Rent Info Deleted";
         public static string ListedById = "Rents Listed By Id";
         public static string RentDetailsListed = "Rent Details Listed";
+        internal static string CarIsAlreadyRentBySomeone;
+        internal static string ThisCarCanRent;
     }
 }

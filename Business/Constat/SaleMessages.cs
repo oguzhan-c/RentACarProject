@@ -14,5 +14,6 @@ namespace Business.Constat
         public static string Updated = "Sale Info Updated";
         public static string Deleted = "SaleInfo Deleted";
         public static string ListedById = "Sales Listed By Id";
+        internal static string YouCanNotSaleThisCar;
     }
 }

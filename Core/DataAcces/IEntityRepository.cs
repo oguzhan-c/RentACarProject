@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Core.DataAcces
 {
-    public interface IEntityRepository<Tip> where Tip : class, IEntity, new()//in this way, it was only possible to work with entities
+    public interface IEntityRepository<EntityTip> where EntityTip : class, IEntity, new()//in this way, it was only possible to work with entities
     {
-        List<Tip> GetAll(Expression<Func<Tip, bool>> filter = null);
-        Tip Get(Expression<Func<Tip, bool>> filter);
-        void Add(Tip entity);
-        void Update(Tip entity);
-        void Delete(Tip entity);
+        List<EntityTip> GetAll(Expression<Func<EntityTip, bool>> filter = null);
+        EntityTip Get(Expression<Func<EntityTip, bool>> filter);
+        void Add(EntityTip entity);
+        void Update(EntityTip entity);
+        void Delete(EntityTip entity);
     }
 }

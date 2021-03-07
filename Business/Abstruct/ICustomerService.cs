@@ -15,5 +15,6 @@ namespace Business.Abstruct
         IResult Delete(Customer customer);
         IResult Update(Customer customer);
         IDataResult<Customer> GetById(int id);
+        IResult CheckIfCustomerAlreadyExist(int customerId);
     }
 }

@@ -10,7 +10,13 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-           
+            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
+
+            var result = carImageManager.GetAll();
+            if (result.Succcess)
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void UserTest()

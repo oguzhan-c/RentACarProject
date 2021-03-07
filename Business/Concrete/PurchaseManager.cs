@@ -1,5 +1,6 @@
 ﻿using Business.Abstruct;
 using Business.Constat;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct.DataAcessLayers;
@@ -13,16 +14,27 @@ namespace Business.Concrete
     public class PurchaseManager : IPurchaseService
     {
         IPurchaseDal purchaseDal;
+        ICarService _carService;
 
-        public PurchaseManager(IPurchaseDal purchaseDal)
+
+        public PurchaseManager(IPurchaseDal purchaseDal , ICarService carService)
         {
             this.purchaseDal = purchaseDal;
+            _carService = carService;
         }
 
         public IResult Add(Purchase purchase)
         {
-            purchaseDal.Add(purchase);
+            var result = BusinessRule.Run
+                (
+                    _carService.CheckIfCarAlreadyExist(purchase.CarId)
+                );
+            if (result != null)
+            {
+                return result;
+            }
 
+            purchaseDal.Add(purchase);
             return new SuccessResult(PurchaseMessages.Added);
         }
 

@@ -21,7 +21,6 @@ namespace Core.DataAcces.EntitiyFramework
                 context.SaveChanges();
             }
         }
-
         public void Delete(EntityTip entity)
         {
             using (ContextTip context = new ContextTip())

@@ -3,6 +3,7 @@ using Business.Constat;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation.FluentValidation;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results.Abstruct;
 using Core.Utilities.Results.Concrute;
 using DataAccess.Abstruct.DataAcessLayers;
@@ -10,6 +11,7 @@ using Entities.Concrute;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -26,8 +28,26 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            var result = BusinessRule.Run
+                (
+                    CheckIfCarAlreadyExist(car.CarId)
+                );
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(CarMessages.Added);
+        }
+
+        public IResult CheckIfCarAlreadyExist(int carId)
+        {
+            var result = _carDal.GetAll(c => c.CarId == carId).Any();
+            if (result)
+            {
+                return new ErrorResult(CarMessages.CarAlreadyExist);
+            }
+            return new SuccessResult();
         }
 
         public IResult Delete(Car car)
@@ -43,8 +63,6 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(GeneralMessges.MaintenanceTime);
             }
-
-
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.Listed);
         }
 
