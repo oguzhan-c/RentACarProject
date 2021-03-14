@@ -59,10 +59,6 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 19)
-            {
-                return new ErrorDataResult<List<Car>>(GeneralMessges.MaintenanceTime);
-            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.Listed);
         }
 

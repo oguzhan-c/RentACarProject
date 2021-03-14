@@ -10,8 +10,8 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
-        static string sourcePath = Environment.CurrentDirectory + @"\wwwroot\Images";
-        public static IDataResult<String> Add(IFormFile formFile)
+        static string sourcePath = Environment.CurrentDirectory + @"\wwwroot\Uploads";
+        public static String Add(IFormFile formFile)
         {
             var result = newFilePath(formFile);
             try
@@ -19,22 +19,22 @@ namespace Core.Utilities.Helpers
                 var sourcePath = Path.GetTempFileName();
                 if (formFile.Length > 0)
                 {
-                    using (FileStream stream = new FileStream(sourcePath,FileMode.Create))
+                    using (FileStream stream = new FileStream(sourcePath, FileMode.Create))
                     {
                         formFile.CopyTo(stream);
                     }
                     File.Move(sourcePath, result);
-                    return new SuccessDataResult<string>(result, "File Added");
+                    return result;
                 }
                 else
                 {
-                    return new ErrorDataResult<string>("File Can Not Added");
+                    return null;
                 }
             }
             catch (Exception exception)
             {
-
-                return new ErrorDataResult<string>(exception.Message);
+                Console.WriteLine(exception);
+                throw;
             }
         }
 
@@ -51,37 +51,37 @@ namespace Core.Utilities.Helpers
             return new SuccessResult();
         }
 
-        public static IDataResult<string>Update(IFormFile formFile , String oldSourcePath)
+        public static string Update(IFormFile formFile, String oldSourcePath)
         {
             try
             {
-                if (File.Exists(oldSourcePath))
+                var result = newFilePath(formFile);
+                if (oldSourcePath.Length > 0)
                 {
-                    FileHelper.Delete(oldSourcePath);
-
-                    FileHelper.Add(formFile);
-
-                    return new SuccessDataResult<String>(); 
+                    using (var stream = new FileStream(result,FileMode.Create))
+                    {
+                        formFile.CopyTo(stream);
+                    }
                 }
-                else
-                {
-                    return new ErrorDataResult<String>("File Can Not Found");
-                }
+                File.Delete(oldSourcePath);
+                return result;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
-                return new ErrorDataResult<String>(exception.Message);
+                Console.WriteLine(exception);
+                throw;
             }
+
         }
 
         private static String newFilePath(IFormFile formFile)
         {
             var fileExtension = Path.GetExtension(sourcePath + formFile.FileName);
             var newGuidPath = Guid.NewGuid().ToString() + "_" +
-                fileExtension + "_" +
-                DateTime.Now.Day + "_" +
-                DateTime.Now.Month + "_" +
-                DateTime.Now.Year + "_";
+                              DateTime.Now.Day + "_" +
+                              DateTime.Now.Month + "_" +
+                              DateTime.Now.Year + "_" +
+                              fileExtension;
             var result = $@"{sourcePath}\{newGuidPath}";
             return result;
         }

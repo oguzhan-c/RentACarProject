@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,5 +15,7 @@ namespace Business.Constat
         internal static string CarImageAlreadyExist;
         internal static string Deleted;
         internal static string CarImageDidNotAdded;
+        internal static CarImage CarImagesIsNoy;
+        internal static List<CarImage> CarImagesIsNot;
     }
 }

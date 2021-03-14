@@ -16,13 +16,13 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImageDal;
-        ICarService _carService; 
+        readonly ICarImageDal _carImageDal;
+        readonly ICarService _carService;
 
-        public CarImageManager(ICarImageDal carImageDal , ICarService carService)
+        public CarImageManager(ICarImageDal carImageDal, ICarService carService)
         {
             _carImageDal = carImageDal;
-            _carService = carService ;
+            _carService = carService;
         }
 
         public IResult Add(IFormFile file, CarImage carImage)
@@ -36,13 +36,12 @@ namespace Business.Concrete
             {
                 return result;
             }
-            var fileUpload = FileHelper.Add(file);
-            if (fileUpload.Succcess)
-            {
-                carImage.ImagePath = fileUpload.Data;
-                _carImageDal.Add(carImage);
-                return new SuccessResult();
-            }
+
+            carImage.ImagePath = FileHelper.Add(file);
+            carImage.Date = DateTime.Now;
+            _carImageDal.Add(carImage);
+            return new SuccessResult();
+
             return new ErrorResult(CarImageMessages.CarImageDidNotAdded);
         }
 
@@ -53,36 +52,50 @@ namespace Business.Concrete
             return new SuccessResult(CarImageMessages.Deleted);
         }
 
-        public IDataResult<CarImage> Get(int id)
-        {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get)
-        }
-
         public IDataResult<List<CarImage>> GetAll()
         {
-            throw new NotImplementedException();
+            if (_carImageDal.GetAll().Any())
+            {
+                return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
+            }
+
+            return new ErrorDataResult<List<CarImage>>(CarImageMessages.CarImagesIsNot);
+
         }
 
         public IDataResult<CarImage> GetById(int carImageId)
         {
-            throw new NotImplementedException();
+            if (_carImageDal.GetAll(c => c.CarImageId == carImageId).Any())
+            {
+                return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarImageId == carImageId));
+            }
+
+            return new ErrorDataResult<CarImage>(CarImageMessages.CarImagesIsNoy);
         }
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
-            throw new NotImplementedException();
+            if (_carImageDal.GetAll(c => c.CarId == carId).Any())
+            {
+                return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
+            }
+
+            return new ErrorDataResult<List<CarImage>>(CarMessages.ThisCarIsNotExist);
         }
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            throw new NotImplementedException();
+            carImage.ImagePath = FileHelper.Update(file, _carImageDal.Get(c => c.CarImageId == carImage.CarImageId).ImagePath);
+            carImage.Date = DateTime.Now;
+            _carImageDal.Update(carImage);
+            return new SuccessResult();
         }
 
-        private IResult CheckIfCarImageEmpty(int carId,int carImageId)
+        private IResult CheckIfCarImageEmpty(int carId, int carImageId)
         {
             if (!_carService.CheckIfCarAlreadyExist(carId).Succcess)
             {
-                String sourcePath = @"\wwwroot\Images\logo.jpg";
+                String sourcePath = @"\wwwroot\Updates\logo.jpg";
 
                 if (CheckIfImageAlreadyExist(carImageId).Succcess)
                 {
@@ -103,7 +116,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(CarMessages.ThisCarIsNotExist);
             }
-            
+
         }
 
         private IResult CheckIfImageAlreadyExist(int carImageId)
