@@ -12,6 +12,9 @@ namespace Entities.Dtos
         public String CarName { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime ReturnDate { get; set; }
+        public int UseAge { get; set; }
         public decimal DailyPrce { get; set; }
+        public decimal TotalPrice { get; set; }
+
     }
 }

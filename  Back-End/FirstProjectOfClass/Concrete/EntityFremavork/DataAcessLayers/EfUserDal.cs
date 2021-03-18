@@ -4,15 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Core.Entities.Concrute;
+using Core.Utilities.Results.Abstruct;
+using Core.Utilities.Results.Concrute;
 using Entities.Dtos;
 using DataAccess.Concrete.EntityFremavork.DatabaseContexts;
 using DataAccess.Abstruct.DataAcessLayers;
 
 namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
 {
-    public class EfUserDal : EfEntitiyRepositoryBase<User, RentACarContext>, IUserDal
-    {
-        public List<UserDetailsDto> GetUserDetails()
+    public class EfUserDal : EfEntitiyRepositoryBase<User, RentACarContext>, IUserDal { 
+        public List<OperationClaim> GetClaims(User user)
+        {
+            using (RentACarContext context = new RentACarContext())
+            {
+                var result = from OperationClaim in context.OperationClaims
+                    join UserOperationClaim in context.UserOperationClaims
+                        on OperationClaim.claimId equals UserOperationClaim.UserOperationClaimId
+                        where UserOperationClaim.UserId == user.UserId
+                             select new OperationClaim{claimId = OperationClaim.claimId , Name = OperationClaim.Name};
+
+                return result.ToList();
+            }
+        }
+
+        public IDataResult<List<UserDetailsDto>> GetUserDetails()
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -22,12 +38,15 @@ namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
                              select new UserDetailsDto
                              {
                                  UserId = u.UserId,
-                                 UserName = c.CustomerName,
-                                 UserLastName = c.CustomerLastname,
+                                 UserName = u.FirstName,
+                                 UserLastName = u.LastName,
                                  Gender = c.Gender,
-                                 DateOfBorth = c.DateOfBorth
+                                 DateOfBorth = c.DateOfBorth,
+                                 Email = u.UserEmail,
+                                 SaveEmail = u.SaveEmail,
                              };
-                return result.ToList();
+                return new SuccessDataResult<List<UserDetailsDto>>(result.ToList());
+
             }
         }
     }

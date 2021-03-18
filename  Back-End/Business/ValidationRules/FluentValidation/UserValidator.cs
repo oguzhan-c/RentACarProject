@@ -3,6 +3,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities.Concrute;
 
 namespace Business.ValidationRules.FluentValidation
 {
@@ -11,8 +12,6 @@ namespace Business.ValidationRules.FluentValidation
         public UserValidator()
         {
             RuleFor(u => u.UserEmail).EmailAddress();
-            RuleFor(u => u.UserPassword).MinimumLength(10);
-            RuleFor(u => u.UserPassword).NotEmpty().WithMessage("Password Can Not Be Empty");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Business.Constat
         public static string Deleted = "Customer Info Deleted";
         public static string ListedById = "Customers Listed By Id";
         public static string CustomerDetailsListed = "Customer Details Listed";
-        internal static string CustomerAlreadyExist;
-        internal static string ThisCustomerIsNotExist;
+        public static string CustomerAlreadyExist;
+        public static string ThisCustomerIsNotExist;
     }
 }

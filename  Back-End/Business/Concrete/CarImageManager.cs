@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Business.BusinessAsspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -25,6 +26,7 @@ namespace Business.Concrete
             _carService = carService;
         }
 
+        [SecuredOperation("carImage.add,admin")]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             var result = BusinessRule.Run

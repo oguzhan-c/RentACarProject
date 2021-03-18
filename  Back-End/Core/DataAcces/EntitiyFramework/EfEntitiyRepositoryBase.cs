@@ -37,7 +37,7 @@ namespace Core.DataAcces.EntitiyFramework
             {
                 return context.Set<EntityTip>().SingleOrDefault(filter);
             }
-        }
+        }                                                                                                                                                                                  
 
         public List<EntityTip> GetAll(Expression<Func<EntityTip, bool>> filter = null)
         {

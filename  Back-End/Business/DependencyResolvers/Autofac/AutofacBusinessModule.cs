@@ -9,9 +9,14 @@ using DataAccess.Concrete.EntityFremavork.DataAcessLayers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Utilities.IoC;
+using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Http;
 
-namespace Business.IoCConfigration.Autofac
+namespace Business.DependencyResolvers.Autofac
 {
+    //Projeye Özel Injections Lar Burda Yer Alır 
+    //Genel Injections lar ise coreda bulunur
     public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -39,6 +44,11 @@ namespace Business.IoCConfigration.Autofac
 
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
+
+
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

@@ -1,0 +1,4 @@
+﻿.net te varolan nesneye yeni metotlar ekleyebilirsiniz
+AddEmail(this ICollection<Claim> claims, string email)
+this gördüğünde AddEmail metodu thisden sonra gelen yere eklenir
+bir nevi genişletme.

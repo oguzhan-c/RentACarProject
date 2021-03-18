@@ -11,7 +11,7 @@ namespace Business.ValidationRules.FluentValidation
         public RentValidator()
         {
             RuleFor(r => r.CarId).NotEmpty().WithMessage("CarId Can Not Empty!");
-            RuleFor(r => r.CustomerId).NotEmpty().WithMessage("CustomerId Can Not Empty!");
+            RuleFor(r => r.UserId).NotEmpty().WithMessage("CustomerId Can Not Empty!");
             RuleFor(r => r.DailyPrice).NotEmpty().WithMessage("DailyPrice Can Not Empty!");
             RuleFor(r => r.RentId).NotEmpty().WithMessage("RentId Can Not Empty!");
             RuleFor(r => r.RentDate).NotEmpty().WithMessage("RentDate Can Not Empty!");

@@ -12,13 +12,13 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(c => c.CustomerId).NotEmpty().WithMessage("Customer Id Can Not Empty!");
             RuleFor(c => c.UserId).NotEmpty().WithMessage("UserId Id Can Not Empty!");
-            RuleFor(c => c.CustomerName).NotEmpty().WithMessage("CustomerName Id Can Not Empty!");
-            RuleFor(c => c.CustomerLastname).NotEmpty().WithMessage("CustomerLastname Id Can Not Empty!");
+            //RuleFor(c => c.CustomerName).NotEmpty().WithMessage("CustomerName Id Can Not Empty!");
+            //RuleFor(c => c.CustomerLastname).NotEmpty().WithMessage("CustomerLastname Id Can Not Empty!");
             RuleFor(c => c.DateOfBorth).NotEmpty().WithMessage("DateOfBorth Id Can Not Empty!");
             RuleFor(c => c.Gender).NotEmpty().WithMessage("Gender Id Can Not Empty!");
             RuleFor(c => c.IdentityNumber).NotEmpty().WithMessage("IdentityNumber Id Can Not Empty!");
-            RuleFor(c => c.CustomerName).Must(IsChar).WithMessage("CustomerName Name Can Not Valid Number Or Special Characters !");
-            RuleFor(c => c.CustomerLastname).Must(IsChar).Must(IsSymbol).WithMessage("CustomerLastname Name Can Not Valid Number Or Special Characters !");
+            //RuleFor(c => c.CustomerName).Must(IsChar).WithMessage("CustomerName Name Can Not Valid Number Or Special Characters !");
+            //RuleFor(c => c.CustomerLastname).Must(IsChar).Must(IsSymbol).WithMessage("CustomerLastname Name Can Not Valid Number Or Special Characters !");
             RuleFor(c => c.IdentityNumber).Must(IsNumber).WithMessage("İdentity Number Must Be A Number!");
             RuleFor(c => c.Gender).Must(IsNumber).Must(IsSymbol).WithMessage("Gender Can Not Valid Number Or Symbol!");
             RuleFor(c => c.DateOfBorth).Must(IAgeBigEnough).WithMessage("Under 18s can't rent a car!");

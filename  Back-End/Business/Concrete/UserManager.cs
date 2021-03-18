@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Core.Entities.Concrute;
 
 namespace Business.Concrete
 {
@@ -57,7 +58,13 @@ namespace Business.Concrete
 
         public IDataResult<List<UserDetailsDto>> GetUsersDetails()
         {
-            return new SuccessDataResult<List<UserDetailsDto>>(_userDal.GetUserDetails(),UserMessages.UserDetaislListed);
+            var result = _userDal.GetUserDetails();
+            if (result.Succcess)
+            {
+                return new SuccessDataResult<List<UserDetailsDto>>(result.Data);
+            }
+
+            return new ErrorDataResult<List<UserDetailsDto>>(UserMessages.UserDetailsİsNotExist);
         }
 
         public IResult Update(User user)
@@ -87,5 +94,20 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            var result = _userDal.GetAll(u => u.UserEmail == email).Any();
+            if (result)
+            {
+                return new SuccessDataResult<User>(_userDal.Get(u => u.UserEmail == email));
+            }
+
+            return new ErrorDataResult<User>(UserMessages.MailIsNotExist);
+        }
     }
 }

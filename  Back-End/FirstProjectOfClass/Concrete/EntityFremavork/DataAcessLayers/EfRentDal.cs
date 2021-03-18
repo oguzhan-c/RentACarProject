@@ -19,24 +19,22 @@ namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
                 var result = from r in context.Rent
                              join c in context.Cars
                              on r.CarId equals c.CarId
-                             join cu in context.Customers
-                             on r.CustomerId equals cu.CustomerId
+                             join u in context.Users
+                             on r.UserId equals u.UserId
                              select new RentDetailDto
                              {
                                  RentId = r.RentId,
                                  CarName = c.CarName,
-                                 CustomerName = cu.CustomerName,
-                                 CustomerLastName = cu.
-                                 CustomerLastname,
+                                 CustomerName = u.FirstName,
+                                 CustomerLastName = u.LastName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate,
+                                 UseAge = (r.ReturnDate - r.RentDate).Days ,
                                  DailyPrce = r.DailyPrice,
-
+                                 TotalPrice = r.UseAge * r.DailyPrice
                              };
 
                 return result.ToList();
-
-
             }
         }
     }

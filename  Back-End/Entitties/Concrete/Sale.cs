@@ -10,7 +10,7 @@ namespace Entities.Concrute
     {
         [Key]
         public int SaleId { get; set; }
-        public int CustomerId { get; set; }
+        public int UserId { get; set; }
         public int CarId { get; set; }
         public DateTime BuyingDate { get; set; }
         public decimal SalePrice { get; set; }
