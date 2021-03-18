@@ -6,7 +6,7 @@ namespace Core.Entities.Concrute
     {
         [Key]
         public int  UserOperationClaimId { get; set; }
-        public int claimId { get; set; }
+        public int ClaimId { get; set; }
         public int UserId { get; set; }
     }
 }

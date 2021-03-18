@@ -39,27 +39,27 @@ namespace Business.Concrete
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;
-            if (userToCheck == null)
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            if (!userToCheck.Succcess )
             {
-                return new ErrorDataResult<User>(UserMessages.UserNotFound);
+                return new ErrorDataResult<User>(userToCheck.Message);
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash,userToCheck.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash,userToCheck.Data.PasswordSalt))
             {                                                                                                                                                                                           
                 return new ErrorDataResult<User>(UserMessages.PasswordError);
             }
 
-            return new SuccessDataResult<User>(userToCheck,UserMessages.SuccessfulLogin);
+            return new SuccessDataResult<User>(userToCheck.Data,UserMessages.SuccessfulLogin);
         }
 
         public IResult UserExists(string email)
         {
             if (_userService.GetByMail(email).Succcess)
             {
-                return new ErrorResult(UserMessages.UserAlreadyExist);
+                return new SuccessResult(UserMessages.UserAlreadyExist);
             }
-            return new SuccessResult(UserMessages.UserNotFound);
+            return new ErrorResult(UserMessages.UserNotFound);
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)

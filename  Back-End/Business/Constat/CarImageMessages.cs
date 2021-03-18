@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.Concrute;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,6 @@ namespace Business.Constat
         internal static string CarImageDidNotAdded;
         internal static CarImage CarImagesIsNoy;
         internal static List<CarImage> CarImagesIsNot;
+        internal static List<Car> NeverCarAdded;
     }
 }

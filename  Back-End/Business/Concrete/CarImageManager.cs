@@ -54,6 +54,7 @@ namespace Business.Concrete
             return new SuccessResult(CarImageMessages.Deleted);
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<CarImage>> GetAll()
         {
             if (_carImageDal.GetAll().Any())

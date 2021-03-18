@@ -16,5 +16,6 @@ namespace Business.Constat
         public static string RentDetailsListed = "Rent Details Listed";
         internal static string CarIsAlreadyRentBySomeone;
         internal static string ThisCarCanRent;
+        internal static List<Rent> NoBodyDidNotRentACar;
     }
 }

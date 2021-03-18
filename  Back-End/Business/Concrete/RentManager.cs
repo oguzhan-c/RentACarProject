@@ -47,7 +47,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Rent>> GetAll()
         {
-            return new SuccessDataResult<List<Rent>>(rentDal.GetAll(), RentMessages.Listed);
+            var result = rentDal.GetAll().Any();
+            if (result)
+            {
+                return new SuccessDataResult<List<Rent>>(rentDal.GetAll(), RentMessages.Listed);
+            }
+            return new ErrorDataResult<List<Rent>>(RentMessages.NoBodyDidNotRentACar);
         }
 
         public IDataResult<Rent> GetById(int id)

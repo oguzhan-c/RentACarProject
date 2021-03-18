@@ -26,7 +26,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add,admin")]
+        [SecuredOperation("admin,car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -52,18 +52,27 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("admin,car.delete")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(CarMessages.Deleted);
         }
 
+        [SecuredOperation("admin,car.list")]
         [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.Listed);
+            var result = _carDal.GetAll().Any();
+            if (result)
+            {
+                return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.Listed);
+            }
+
+            return new ErrorDataResult<List<Car>>(CarImageMessages.NeverCarAdded);
         }
 
+        [SecuredOperation("admin,car.getbyid")]
         public IDataResult<Car> GetById(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c=>c.CarId == carId), CarMessages.ListedById);

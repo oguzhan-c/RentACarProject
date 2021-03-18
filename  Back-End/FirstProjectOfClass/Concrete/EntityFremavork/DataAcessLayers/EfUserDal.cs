@@ -20,9 +20,9 @@ namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
             {
                 var result = from OperationClaim in context.OperationClaims
                     join UserOperationClaim in context.UserOperationClaims
-                        on OperationClaim.claimId equals UserOperationClaim.UserOperationClaimId
-                        where UserOperationClaim.UserId == user.UserId
-                             select new OperationClaim{claimId = OperationClaim.claimId , Name = OperationClaim.Name};
+                        on OperationClaim.ClaimId equals UserOperationClaim.UserOperationClaimId
+                    where UserOperationClaim.UserId == user.UserId
+                    select new OperationClaim { ClaimId = OperationClaim.ClaimId, Name = OperationClaim.Name };
 
                 return result.ToList();
             }
