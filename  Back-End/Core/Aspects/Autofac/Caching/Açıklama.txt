@@ -1,0 +1,7 @@
+﻿Cache Aspect : Maniplasyon yapan metotlar yani veride değişiklik yapan metotlar update add delete gibi bunları cacheremoveaspect ile yönet
+diğer türlü metotları get gibi onları cache aspet il yönet.
+Cache yönetimine dikkat et.
+
+veritabanına elle data ekleme.
+
+Bussines arayüze yazılırsa cache kullanılamaz.o yüzden bussiness i tek birçatıda kullan

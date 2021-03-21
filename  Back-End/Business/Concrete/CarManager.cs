@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Business.BusinessAsspects.Autofac;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -26,6 +27,8 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+
+        [CacheRemoveAspect("IProductService.Get")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -51,13 +54,19 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult AddTransactionalTest(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(CarMessages.Deleted);
         }
 
-        [SecuredOperation("carList/car.list")]
+        [CacheAspect]
         [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetAll()
         {
@@ -70,11 +79,13 @@ namespace Business.Concrete
             return new ErrorDataResult<List<Car>>(CarImageMessages.NeverCarAdded);
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id == carId), CarMessages.ListedById);
         }
 
+        [CacheRemoveAspect("IproductService.Get")]
         public IResult Update(Car car)
         {
             Update(car);

@@ -1,0 +1,5 @@
+﻿cashing : Bir kullanıcı istkte bulunduğunda microsoftun cash yapılandırması olan inmemory cash ile onu bellekte tutmak
+ve bir daha o işlem başka bir kullanıcı tarafından istendiğinde onu database yerine direkt olarak bellekten getirmek.
+Ayrıca o işlem silindiğinde veya güncellendiğinde veya o işlemle alakalı yeni bir şey eklendiğinde o cash in bellekten 
+silinmesi istenmekte.
+C
