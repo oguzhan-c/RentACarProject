@@ -9,7 +9,7 @@ namespace Entities.Concrute
          public class Car: IEntity
         {
             [Key]
-            public int CarId { get; set; }
+            public int Id { get; set; }
             public String Marque { get; set; }
             public String CarName { get; set; }
             public String Description { get; set; }

@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.InMemory
             {
                 new Car
                 {
-                    CarId=1,
+                    Id=1,
                     Marque="Ford",
                     CarName="Mustang",
                     BrandDate=1976,
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.InMemory
                 },
                 new Car
                 {
-                    CarId=2,
+                    Id=2,
                     Marque="Ford",
                     CarName="Mustang",
                     BrandDate=1976,
@@ -50,7 +50,7 @@ namespace DataAccess.Concrete.InMemory
         {
             Car carToDelete = cars.SingleOrDefault
                 (
-                    c => c.CarId == car.CarId
+                    c => c.Id == car.Id
                 );
             cars.Remove(carToDelete);
         }
@@ -69,7 +69,7 @@ namespace DataAccess.Concrete.InMemory
         {
             Car carToUpdate = cars.SingleOrDefault
                 (
-                    c => c.CarId == car.CarId
+                    c => c.Id == car.Id
                 );
             carToUpdate.CarName = car.CarName;
             carToUpdate.Color = car.Color;

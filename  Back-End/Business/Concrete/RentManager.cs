@@ -57,7 +57,7 @@ namespace Business.Concrete
 
         public IDataResult<Rent> GetById(int id)
         {
-            return new SuccessDataResult<Rent>(rentDal.Get(r=>r.RentId == id), RentMessages.ListedById);
+            return new SuccessDataResult<Rent>(rentDal.Get(r=>r.Id == id), RentMessages.ListedById);
         }
 
         public IDataResult<List<RentDetailDto>> GetRentDetails()

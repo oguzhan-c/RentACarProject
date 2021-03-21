@@ -6,7 +6,7 @@ namespace Entities.Dtos
 {
     public class RentDetailDto
     {
-        public int RentId { get; set; }
+        public int Id { get; set; }
         public String CustomerName { get; set; }
         public String CustomerLastName { get; set; }
         public String CarName { get; set; }

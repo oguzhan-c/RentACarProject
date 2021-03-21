@@ -6,7 +6,7 @@ namespace Entities.Dtos
 {
     public class UserDetailsDto
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public String UserName { get; set; }
         public String UserLastName { get; set; }
         public String Gender { get; set; }

@@ -26,13 +26,12 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("admin,car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             var result = BusinessRule.Run
                 (
-                    CheckIfCarAlreadyExist(car.CarId)
+                    CheckIfCarAlreadyExist(car.Id)
                 );
             if (result != null)
             {
@@ -44,7 +43,7 @@ namespace Business.Concrete
 
         public IResult CheckIfCarAlreadyExist(int carId)
         {
-            var result = _carDal.GetAll(c => c.CarId == carId).Any();
+            var result = _carDal.GetAll(c => c.Id == carId).Any();
             if (result)
             {
                 return new ErrorResult(CarMessages.CarAlreadyExist);
@@ -52,14 +51,13 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        [SecuredOperation("admin,car.delete")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(CarMessages.Deleted);
         }
 
-        [SecuredOperation("admin,car.list")]
+        [SecuredOperation("carList/car.list")]
         [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetAll()
         {
@@ -72,10 +70,9 @@ namespace Business.Concrete
             return new ErrorDataResult<List<Car>>(CarImageMessages.NeverCarAdded);
         }
 
-        [SecuredOperation("admin,car.getbyid")]
         public IDataResult<Car> GetById(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c=>c.CarId == carId), CarMessages.ListedById);
+            return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id == carId), CarMessages.ListedById);
         }
 
         public IResult Update(Car car)

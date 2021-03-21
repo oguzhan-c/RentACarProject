@@ -40,7 +40,7 @@ namespace Business.Concrete
         {
             IResult result = BusinessRule.Run
                 (
-                    CheckIfUserAlreadyDeleted(user.UserId)
+                    CheckIfUserAlreadyDeleted(user.Id)
                 );
             _userDal.Delete(user);
             return new SuccessResult(UserMessages.Deleted);
@@ -53,7 +53,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=>u.UserId == id),UserMessages.ListedById);
+            return new SuccessDataResult<User>(_userDal.Get(u=>u.Id == id),UserMessages.ListedById);
         }
 
         public IDataResult<List<UserDetailsDto>> GetUsersDetails()
@@ -85,7 +85,7 @@ namespace Business.Concrete
 
         private IResult CheckIfUserAlreadyDeleted(int id)
         {
-            var result = _userDal.GetAll(u => u.UserId == id).Any();
+            var result = _userDal.GetAll(u => u.Id == id).Any();
 
             if (!result)
             {
@@ -96,7 +96,13 @@ namespace Business.Concrete
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+            var result = _userDal.GetClaims(user);
+            if (result.Succcess)
+            {
+                return new SuccessDataResult<List<OperationClaim>>(result.Data);
+            }
+
+            return new ErrorDataResult<List<OperationClaim>>(UserMessages.ClaimsDoNotExist);
         }
 
         public IDataResult<User> GetByMail(string email)

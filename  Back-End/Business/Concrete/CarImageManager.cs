@@ -31,7 +31,7 @@ namespace Business.Concrete
         {
             var result = BusinessRule.Run
                 (
-                    CheckIfImageAlreadyExist(carImage.CarImageId),
+                    CheckIfImageAlreadyExist(carImage.Id),
                     CheckIfImageLimitExceed(carImage.CarId)
                 );
             if (result != null)
@@ -68,9 +68,9 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int carImageId)
         {
-            if (_carImageDal.GetAll(c => c.CarImageId == carImageId).Any())
+            if (_carImageDal.GetAll(c => c.Id == carImageId).Any())
             {
-                return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarImageId == carImageId));
+                return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == carImageId));
             }
 
             return new ErrorDataResult<CarImage>(CarImageMessages.CarImagesIsNoy);
@@ -88,7 +88,7 @@ namespace Business.Concrete
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            carImage.ImagePath = FileHelper.Update(file, _carImageDal.Get(c => c.CarImageId == carImage.CarImageId).ImagePath);
+            carImage.ImagePath = FileHelper.Update(file, _carImageDal.Get(c => c.Id == carImage.Id).ImagePath);
             carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();
@@ -124,7 +124,7 @@ namespace Business.Concrete
 
         private IResult CheckIfImageAlreadyExist(int carImageId)
         {
-            var result = _carImageDal.GetAll(c => c.CarImageId == carImageId).Any();
+            var result = _carImageDal.GetAll(c => c.Id == carImageId).Any();
             if (result)
             {
                 return new ErrorResult(CarImageMessages.ImageAlreadyExist);

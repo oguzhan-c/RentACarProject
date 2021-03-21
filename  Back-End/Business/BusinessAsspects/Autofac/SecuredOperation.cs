@@ -16,13 +16,13 @@ namespace Business.BusinessAsspects.Autofac
     //JWT için
     public class SecuredOperation : MethodInterception
     {
-        private string[] _roles;
+        private readonly string[] _roles;
 
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public SecuredOperation(string roles)
         {
-            _roles = roles.Split(',');//metni senin belirttiğin karaktere göre ayırıp arry e atıyor
+            _roles = roles.Split('/');//metni senin belirttiğin karaktere göre ayırıp arry e atıyor
             //IUserService = ServiceTool.ServiceProvider.GetService<IUserService>();
             //form uygulamalarında injections ları bu şekilde yap
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();

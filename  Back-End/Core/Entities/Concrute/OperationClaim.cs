@@ -8,7 +8,7 @@ namespace Core.Entities.Concrute
     public class OperationClaim : IEntity
     {
         [Key]
-        public int ClaimId { get; set; }
+        public int Id { get; set; }
         public String Name { get; set; }
     }
 }

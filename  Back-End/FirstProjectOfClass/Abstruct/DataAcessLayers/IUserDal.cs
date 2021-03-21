@@ -11,7 +11,7 @@ namespace DataAccess.Abstruct.DataAcessLayers
 {
     public interface IUserDal : IEntityRepository<User>
     {
-        List<OperationClaim> GetClaims(User user);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
         IDataResult<List<UserDetailsDto>> GetUserDetails();
     }
 }

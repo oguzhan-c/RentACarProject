@@ -18,7 +18,7 @@ namespace ConsoleUI
                 {
                     Console.WriteLine
                     (
-                        "UserId :\t" + user.UserId +
+                        "UserId :\t" + user.Id +
                         "User E-Mail :\t" + user.UserEmail
                     );
                 }

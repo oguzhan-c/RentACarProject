@@ -51,7 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<Purchase> GetById(int id)
         {
-            return new SuccessDataResult<Purchase>(purchaseDal.Get(p=>p.PurchaseId == id), PurchaseMessages.ListedById);
+            return new SuccessDataResult<Purchase>(purchaseDal.Get(p=>p.Id == id), PurchaseMessages.ListedById);
         }
 
         public IResult Update(Purchase purchase)

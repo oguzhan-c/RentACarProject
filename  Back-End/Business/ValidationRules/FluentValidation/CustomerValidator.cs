@@ -10,7 +10,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CustomerValidator()
         {
-            RuleFor(c => c.CustomerId).NotEmpty().WithMessage("Customer Id Can Not Empty!");
+            RuleFor(c => c.Id).NotEmpty().WithMessage("Customer Id Can Not Empty!");
             RuleFor(c => c.UserId).NotEmpty().WithMessage("UserId Id Can Not Empty!");
             //RuleFor(c => c.CustomerName).NotEmpty().WithMessage("CustomerName Id Can Not Empty!");
             //RuleFor(c => c.CustomerLastname).NotEmpty().WithMessage("CustomerLastname Id Can Not Empty!");

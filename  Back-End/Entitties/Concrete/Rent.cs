@@ -9,7 +9,7 @@ namespace Entities.Concrute
     public class Rent : IEntity
     {
         [Key]
-        public int RentId { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
         public int CarId { get; set; }
         public DateTime RentDate { get; set; }

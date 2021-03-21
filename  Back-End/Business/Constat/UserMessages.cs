@@ -25,6 +25,7 @@ namespace Business.Constat
         public static string SuccessfulLogin = "SuccessfulLogin";
         public static string MailDoNotFound = "MailDoNotFound";
         public static string MailIsNotExist = "MailIsNotExist";
-        internal static string AccessTokenCreated = "AccessTokenCreated";
+        public static string AccessTokenCreated = "AccessTokenCreated";
+        public static string ClaimsDoNotExist= "ClaimsDoNotExist";
     }
 }

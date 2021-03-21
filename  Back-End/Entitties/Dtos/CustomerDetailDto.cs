@@ -7,7 +7,7 @@ namespace Entities.Dtos
 {
     public class CustomerDetailDto : IDto
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         public String CustomerName { get; set; }
         public String CustomerLastname { get; set; }
         public String Gender { get; set; }

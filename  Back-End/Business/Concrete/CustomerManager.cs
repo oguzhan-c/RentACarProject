@@ -26,7 +26,7 @@ namespace Business.Concrete
         {
             var result = BusinessRule.Run
                 (
-                    CheckIfCustomerAlreadyExist(customer.CustomerId)
+                    CheckIfCustomerAlreadyExist(customer.Id)
                 );
             if (result != null)
             {
@@ -39,7 +39,7 @@ namespace Business.Concrete
         public IResult CheckIfCustomerAlreadyExist(int customerId)
         {
             {
-                var result = customerDal.GetAll(c => c.CustomerId == customerId).Any();
+                var result = customerDal.GetAll(c => c.Id == customerId).Any();
 
                 if (result)
                 {
@@ -63,7 +63,7 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetById(int id)
         {
-            customerDal.GetAll(c => c.CustomerId == id);
+            customerDal.GetAll(c => c.Id == id);
             return new SuccessDataResult<Customer>(CustomerMessages.ListedById);
         }
 

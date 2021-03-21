@@ -9,7 +9,7 @@ namespace Entities.Concrute
     public class Communication : IEntity
     {
         [Key]
-        public int CommunicationId { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public String Street { get; set; }
         public String City { get; set; }

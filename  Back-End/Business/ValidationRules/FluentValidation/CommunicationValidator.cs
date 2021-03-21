@@ -10,7 +10,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CommunicationValidator()
         {
-            RuleFor(c => c.CommunicationId).NotEmpty().WithMessage("CommunicationId Can Not Be Empty!");
+            RuleFor(c => c.Id).NotEmpty().WithMessage("CommunicationId Can Not Be Empty!");
             RuleFor(c => c.CustomerId).NotEmpty().WithMessage("CustomerId Can Not Be Empty!");
             RuleFor(c => c.Address).NotEmpty().WithMessage("Address Can Not Be Empty!");
             RuleFor(c => c.Country).NotEmpty().WithMessage("Country Can Not Be Empty!");

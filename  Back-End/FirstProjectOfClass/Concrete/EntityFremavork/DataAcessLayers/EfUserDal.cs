@@ -13,19 +13,18 @@ using DataAccess.Abstruct.DataAcessLayers;
 
 namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
 {
-    public class EfUserDal : EfEntitiyRepositoryBase<User, RentACarContext>, IUserDal { 
-        public List<OperationClaim> GetClaims(User user)
+    public class EfUserDal : EfEntitiyRepositoryBase<User, RentACarContext>, IUserDal
+    {
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            using (RentACarContext context = new RentACarContext())
-            {
-                var result = from OperationClaim in context.OperationClaims
-                    join UserOperationClaim in context.UserOperationClaims
-                        on OperationClaim.ClaimId equals UserOperationClaim.UserOperationClaimId
-                    where UserOperationClaim.UserId == user.UserId
-                    select new OperationClaim { ClaimId = OperationClaim.ClaimId, Name = OperationClaim.Name };
+            var context = new RentACarContext();
+            var result = from operationClaim in context.OperationClaims
+                         join userOperationClaim in context.UserOperationClaims
+                             on operationClaim.Id equals userOperationClaim.OperationClaimId
+                         where userOperationClaim.UserId == user.Id
+                         select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
 
-                return result.ToList();
-            }
+            return new SuccessDataResult<List<OperationClaim>>(result.ToList());
         }
 
         public IDataResult<List<UserDetailsDto>> GetUserDetails()
@@ -34,10 +33,10 @@ namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
             {
                 var result = from u in context.Users
                              join c in context.Customers
-                             on u.UserId equals c.UserId
+                             on u.Id equals c.UserId
                              select new UserDetailsDto
                              {
-                                 UserId = u.UserId,
+                                 Id = u.Id,
                                  UserName = u.FirstName,
                                  UserLastName = u.LastName,
                                  Gender = c.Gender,

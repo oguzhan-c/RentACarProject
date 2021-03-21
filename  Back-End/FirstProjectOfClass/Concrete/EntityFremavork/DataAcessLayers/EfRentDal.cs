@@ -18,12 +18,12 @@ namespace DataAccess.Concrete.EntityFremavork.DataAcessLayers
             {
                 var result = from r in context.Rent
                              join c in context.Cars
-                             on r.CarId equals c.CarId
+                             on r.CarId equals c.Id
                              join u in context.Users
-                             on r.UserId equals u.UserId
+                             on r.UserId equals u.Id
                              select new RentDetailDto
                              {
-                                 RentId = r.RentId,
+                                 Id = r.Id,
                                  CarName = c.CarName,
                                  CustomerName = u.FirstName,
                                  CustomerLastName = u.LastName,

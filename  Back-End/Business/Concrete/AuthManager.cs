@@ -22,8 +22,7 @@ namespace Business.Concrete
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
-            byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatepasswordHash(password, out passwordHash, out passwordSalt);
+            HashingHelper.CreatepasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             var user = new User
             {
                 FirstName = userForRegisterDto.FirstName,
